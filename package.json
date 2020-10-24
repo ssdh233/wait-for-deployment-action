@@ -1,7 +1,7 @@
 {
   "name": "wait-for-deployment-action",
-  "version": "0.0.1",
-  "repo": "SFDigitalServices/wait-for-deployment-action",
+  "version": "1.0.0",
+  "repo": "ssdh233/wait-for-deployment-action",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.2.5",

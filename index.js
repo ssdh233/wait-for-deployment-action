@@ -18,8 +18,6 @@ waitForDeployment(options)
   })
 
 async function waitForDeployment (options) {
-  core.info(`options: ${JSON.stringify(options)}`);
-
   const {
     token,
     interval,
