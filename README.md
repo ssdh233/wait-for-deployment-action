@@ -18,7 +18,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: ssdh233/wait-for-deployment-action@v3.0.0
+      - uses: ssdh233/wait-for-deployment-action@v3.0.1
         id: deployment
         with:
           github-token: ${{ github.token }}
