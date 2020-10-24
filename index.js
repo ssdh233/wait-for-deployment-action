@@ -18,6 +18,8 @@ waitForDeployment(options)
   })
 
 async function waitForDeployment (options) {
+  core.info(`options: ${JSON.stringify(options)}`);
+
   const {
     token,
     interval,
@@ -39,6 +41,7 @@ async function waitForDeployment (options) {
   core.info(`Deployment params: ${JSON.stringify(params, null, 2)}`)
   // throw new Error('DERP')
 
+  let retryCount = 0;
   while (true) {
     const { data: deployments } = await octokit.repos.listDeployments(params)
     core.info(`Found ${deployments.length} deployments...`)
@@ -50,6 +53,7 @@ async function waitForDeployment (options) {
         ...github.context.repo,
         deployment: deployment.id
       })
+      retryCount += 1;
 
       core.info(`\tfound ${statuses.length} statuses`)
 
@@ -62,13 +66,14 @@ async function waitForDeployment (options) {
         if (payload.web_url) {
           url = payload.web_url
         }
+
         return {
           deployment,
           status: success,
           url
         }
       } else {
-        core.info(`No statuses with state === "success": "${statuses.map(status => status.state).join('", "')}"`)
+        core.info(`No statuses with state === "success": "${statuses.map(status => status.state).join('", "')}" (retry: ${retryCount})`)
       }
 
       await sleep(interval)
