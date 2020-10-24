@@ -21,7 +21,7 @@ jobs:
       - uses: SFDigitalServices/wait-for-deployment-action@v1
         id: deployment
         with:
-          token: ${{ github.token }}
+          github-token: ${{ github.token }}
           environment: Preview
 
       - run: echo "Deployed to: ${{ steps.deployment.outputs.url }}"
@@ -29,7 +29,7 @@ jobs:
 
 ## Inputs
 
-### `token`
+### `github-token`
 This is your GitHub access token, typically accessible via `${{ github.token }}`.
 
 ### `environment`
